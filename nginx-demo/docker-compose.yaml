@@ -1,0 +1,34 @@
+services:
+  nginx-demo-1:
+    container_name: nginx-demo-1
+    image: nginx:latest
+    volumes:
+      - ../sites/site1/:/usr/share/nginx/html:ro
+    networks:
+      - proxy_net
+    labels:
+      - "traefik.enable=true"
+      # Router único para HTTPS
+      - "traefik.http.routers.nginx1.rule=Host(`web-nginx01.local`)"
+      - "traefik.http.routers.nginx1.entrypoints=websecure"
+      - "traefik.http.routers.nginx1.tls=true"
+    restart: unless-stopped
+
+  nginx-demo-2:
+    container_name: nginx-demo-2
+    image: nginx:latest
+    volumes:
+      - ../sites/site2:/usr/share/nginx/html:ro
+    networks:
+      - proxy_net
+    labels:
+      - "traefik.enable=true"
+      # Router único para HTTPS  
+      - "traefik.http.routers.nginx2.rule=Host(`web-nginx02.local`)"
+      - "traefik.http.routers.nginx2.entrypoints=websecure"
+      - "traefik.http.routers.nginx2.tls=true"
+    restart: unless-stopped
+
+networks:
+  proxy_net:
+    external: true

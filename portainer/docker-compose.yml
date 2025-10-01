@@ -1,0 +1,16 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:sts
+    container_name: portainer
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ~/Documentos/proyectos_unem/portainer/data:/data
+    networks:
+      - proxy_net
+    restart: unless-stopped
+networks:
+  proxy_net:
+    external: true

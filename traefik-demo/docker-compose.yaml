@@ -1,0 +1,24 @@
+services:
+  traefik:
+    image: traefik:v3.5
+    container_name: traefik-demo-1
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--providers.file.filename=/etc/traefik/traefik.yaml"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ../certs:/certs
+    networks:
+      - proxy_net
+    restart: unless-stopped
+networks:
+  proxy_net:
+    external: true
