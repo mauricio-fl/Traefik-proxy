@@ -2,3 +2,4 @@ portainer/data/
 *.log
 *.env
 __pycache__/
+traefik-demo/certs/
