@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Script para configurar proyectos_unem
-# NOTA: Este script debe ejecutarse desde el directorio proyectos_unem
+# NOTA: Este script debe ejecutarse desde el directorio del REPO
 
-# Aplicar permisos (ruta relativa - requiere ejecutar desde proyectos_unem)
+# Aplicar permisos (ruta relativa - requiere ejecutar desde el directorio del REPO)
 chmod 644 -R sites/
 
 # Añadir a hosts solo si no existen
